@@ -1,0 +1,118 @@
+<style>
+    .errorlist{
+        color: red;
+        font-size: 12px; 
+        font-weight: bold;
+    }
+</style>
+<script>
+    // for adding user
+    $("#btnsave").click(function(){
+        console.log("save button clicked");
+        let nm = $("#nameid").val();
+        let em = $("#emailid").val();
+        let pw = $("#passwordid").val();
+        let csr = $("input[name=csrfmiddlewaretoken").val();
+        
+        mydata = {name :nm, email:em, password:pw, csrfmiddlewaretoken:csr};
+        let output = "";
+        $.ajax({
+            url : "{% url 'savedata' %}",
+            method : "POST",
+            data : mydata,
+            success: function(data){
+                console.log(data)
+                if(data.status == 'save'){
+                    $("#result").html("User data successfully saved");
+                    $("form")[0].reset();
+                    let x = data.student_data;
+                    let len = (x).length;
+                    for(i=0; i<len; i++){
+                        output += `<tr>
+                        <th scope="row">`+x[i].id+`</th>
+                        <td>`+x[i].name+`</td>
+                        <td>`+x[i].email+`</td>
+                        <td>
+                            <div id="update`+x[i].id+`" onclick="" class="btn btn-warning btn-sm"><i class="fa-solid fa-pencil"></i>Edit</div>
+                            <div id="dlt`+x[i].id+`" onclick="dlt(`+x[i].id+`)" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i>Delete</div>
+                        </td>
+                        
+                        </tr>`
+                    }
+                $("#Tbody").html(output);
+
+                }else{
+                    $("#result").removeClass("alert-success");
+                    $("#result").addClass("alert-danger");
+                    $("#result").html("Please Enter your correct Information");
+                }
+            }
+        })
+       
+    });
+    
+    // for delete user
+    function dlt(id){
+        var stid = id;
+        let output = "";
+        let csr = $("input[name=csrfmiddlewaretoken").val();
+        $.ajax({
+            url : "{% url 'delete_data' %}",
+            type: "POST",
+            data : {stuid : stid, csrfmiddlewaretoken:csr},
+            success :function(data){
+                if(data.status == 'delete'){
+                    let x = data.student_data;
+                    let len = (x).length;
+                    for(i=0; i<len; i++){
+                        output += `<tr>
+                        <th scope="row">`+x[i].id+`</th>
+                        <td>`+x[i].name+`</td>
+                        <td>`+x[i].email+`</td>
+                        <td>
+                            <div id="update`+x[i].id+`" onclick="" class="btn btn-warning btn-sm"><i class="fa-solid fa-pencil"></i>Edit</div>
+                            <div id="dlt`+x[i].id+`" onclick="dlt(`+x[i].id+`)" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i>Delete</div>
+                        </td>
+                        
+                        </tr>`
+                    }
+                    $("#Tbody").html(output);
+                }
+                
+            }
+        })
+    }
+
+    // for edit user
+    function edit_data(id){
+        var stid = id;
+        let output = "";
+        let csr = $("input[name=csrfmiddlewaretoken").val();
+        $.ajax({
+            url : "{% url 'edit_user' %}",
+            type: "POST",
+            data : {stuid : stid, csrfmiddlewaretoken:csr},
+            success :function(data){
+                console.log(data);
+                if(data.status == 'edited'){
+                    let x = data.student_data;
+                    let len = (x).length;
+                    for(i=0; i<len; i++){
+                        output += `<tr>
+                        <th scope="row">`+x[i].id+`</th>
+                        <td>`+x[i].name+`</td>
+                        <td>`+x[i].email+`</td>
+                        <td>
+                            <div id="update`+x[i].id+`" onclick="" class="btn btn-warning btn-sm"><i class="fa-solid fa-pencil"></i>Edit</div>
+                            <div id="dlt`+x[i].id+`" onclick="dlt(`+x[i].id+`)" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i>Delete</div>
+                        </td>
+                        
+                        </tr>`
+                    }
+                    $("#Tbody").html(output);
+                }
+                
+            }
+        })
+    }
+</script>

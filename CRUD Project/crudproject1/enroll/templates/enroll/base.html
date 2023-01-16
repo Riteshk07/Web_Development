@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CRUD- Ritesh{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'enroll/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'enroll/css/all.min.css' %}">
+    
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center alert alert-danger">Function Base View ModelForm CRUD Project</h2>
+        {% block content %}
+        <h3> this is content</h3>
+        {% endblock content %}
+    </div>
+
+    <script src="{% static 'enroll/js/jquary.js' %}"></script>
+    <script src="{% static 'enroll/js/poper.js' %}"></script>
+    <script src="{% static 'enroll/js/all.min.js.js' %}"></script>
+    <script src="{% static 'enroll/js/base.js' %}"></script>
+    {% block myscript %}{% endblock myscript %}
+</body>
+</html>

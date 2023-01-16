@@ -1,0 +1,67 @@
+{% extends 'enroll/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-4">
+        <h4 class="text-center alert alert-info">Add New Student</h4>
+        <form method="post">{% csrf_token %}
+            {% for field in forms %}
+            <div>
+                {{field.label_tag}}  {{field}}
+                {% if field.html_name == 'name' %}
+                <span class="errorlist" id="resultnm"></span>
+                {% elif field.html_name == 'email' %}
+                <span class="errorlist" id="resultem"></span>
+                {% else %}
+                <span class="errorlist" id="resultpw"></span>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <input type="button" class="btn btn-success" id="btnsave" value="Save">
+            
+        </form>
+        <div class="alert alert-success" role="alert" id="result">
+            
+        </div>
+    </div>
+    <div class="col-sm-7 offset-1">
+        <h4 class="text-center alert alert-info">Show Student Information</h4>
+        {% if users %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Action</th>
+                </tr>
+            </thead>
+            
+            <tbody id="Tbody">
+            {% for usr in users %}
+                <tr>
+                  <th scope="row">{{usr.id}}</th>
+                  <td>{{usr.name}}</td>
+                  <td>{{usr.email}}</td>
+                  <td>
+                    <div id="update{{usr.id}}" onclick="edit_data({{usr.id}})" class="btn btn-warning btn-sm"><i class="fa-solid fa-pencil"></i>Edit</div>
+                    <div id="dlt{{usr.id}}" onclick="dlt({{usr.id}})" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i>Delete</div>
+                  </td>
+                  
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <h4>No Records...</h4>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock content %}
+
+{% block myscript %}
+{% include "enroll/ajax.html" %}
+
+{% endblock myscript %}

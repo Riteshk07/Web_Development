@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang = "en">
+    <head>
+        <title>Form tag</title>
+        <style>
+            td{
+                height: 40px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <form action="ol_ul.html">
+            <table border = "0" width = "60%" align = "center">
+                <caption>SignUp :</caption>
+                <tr>
+                    <th width="40%" align = "right">User Name :</th>
+                    <td width="60%"><input type="text" name = "uname"/></td>
+                </tr>
+                <tr>
+                    <th align = "right">Email :</th>
+                    <td><input type="email" name="email"/></td>
+                </tr>
+                <tr>
+                    <th align = "right">Password :</th>
+                    <td><input type="password" name="pass"/></td>
+                </tr>
+                <tr>
+                    <th align = "right">DOB :</th>
+                    <td><input type="date" name="dob"/></td>
+                </tr>
+                <tr>
+                    <th align = "right">Gender :</th>
+                    <td>
+                        Male<input type="radio" name = "gender" value = "M"/>&nbsp;&nbsp;&nbsp;
+                        Female<input type = "radio" name="gender" value = "F"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th align = "right">Food Options :</th>
+                    <td>
+                        Samosa<input type="checkbox" name = "food" value="Samosa"/>&nbsp;&nbsp;&nbsp;
+                        Jalebi<input type="checkbox" name = "food" value="Jalebi"/>&nbsp;&nbsp;&nbsp;
+                        Aalubada<input type="checkbox" name = "food" value="Aalubada"/>&nbsp;&nbsp;&nbsp;
+                        Kachodi<input type = "checkbox" name="food" value="Kachodi"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th align = "right">City</th>
+                    <td>
+                        <select name="city">
+                            <option>Select City</option>
+                            <option>Jabalpur</option>
+                            <option>Bhopal</option>
+                            <option>Indore</option>
+                            <option>Ujjain</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th align = "right" valign="top">Address :</th>
+                    <td>
+                        <textarea name="Address" row="20" cols="40"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="file" name="pic"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="Register" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
